@@ -1,0 +1,69 @@
+﻿@using Recruit_Pro.Models;
+@model List<Position>
+
+<link href="~/css/Position.css" rel="stylesheet" />
+<div class="card upperbox">
+	<div class="left">
+		<h2>Positions</h2>
+		<p>Manage Positions</p>
+	</div>
+	<div class="right">
+		<div >
+		<a asp-controller="Position" asp-action="Create" class="btn btn-primary" style="margin-right: 15px;">Add Position</a>
+		<button class="btn btn-secondary">Export</button>
+		</div>
+		<div class="table-search">
+			<form action="/" method="post">
+				<input type="text" placeholder="Search..." name="search" class="search-input" />
+			</form>
+		</div>
+	</div>
+
+</div>
+<div class="card lowerbox">
+	<table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Position Name</th>
+                <th>Department</th>
+                <th>Description</th>
+                <th>Remarks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.position_id</td>
+                        <td>@p.title</td>
+                        <td>@p.department</td>
+                        <td>@p.description</td>
+                        <td>@p.remarks</td>
+                        <td>
+                            <div style="display: flex; gap: 5px; justify-content: space-around">
+                                <a asp-controller="Position" asp-action="Edit" asp-route-id="@p.position_id" class="btn btn-sm btn-secondary">Edit</a>
+
+                                <form asp-controller="Position" asp-action="Delete"  method="post" onsubmit="return confirm('Delete this position?');">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@p.position_id" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" style="text-align: center;">No positions found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

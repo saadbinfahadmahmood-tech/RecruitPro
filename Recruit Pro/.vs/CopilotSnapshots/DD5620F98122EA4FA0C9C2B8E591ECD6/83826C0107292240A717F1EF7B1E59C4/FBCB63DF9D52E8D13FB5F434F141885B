@@ -1,0 +1,99 @@
+﻿@using Recruit_Pro.Models;
+@model Position
+
+<link href="~/css/Position.css" rel="stylesheet" />
+<div class="card upperbox">
+    <h2>@(Model != null && Model.position_id > 0 ? "Edit Position" : "Add Position")</h2>
+</div>
+
+<div class="card lowerbox">
+    <form asp-controller="Position" asp-action="@(Model != null && Model.position_id > 0 ? "Edit" : "Create")" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="position_id" />
+
+        <div class="form-group">
+            <label>Title</label>
+            <input asp-for="title" class="form-control" />
+            <span asp-validation-for="title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Department</label>
+            <input asp-for="department" class="form-control" />
+            <span asp-validation-for="department" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea asp-for="description" class="form-control"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Gender</label>
+                <select asp-for="gender" class="form-control" asp-items="ViewBag.GendersSelectList">
+                    <option value="">-- Select --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <select asp-for="status" class="form-control" asp-items="ViewBag.StatusesSelectList">
+                    <option value="0">-- Select --</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Responsibilities</label>
+            <textarea asp-for="responsibilities" class="form-control"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Domicile</label>
+                <input asp-for="domicile" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Scale</label>
+                <input asp-for="scale" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Starting Salary</label>
+                <input asp-for="starting_salary" class="form-control" type="number" />
+            </div>
+            <div class="form-group">
+                <label>Maximum Salary</label>
+                <input asp-for="maximum_salary" class="form-control" type="number" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Minimum Age</label>
+                <input asp-for="minimum_age" class="form-control" type="number" />
+            </div>
+            <div class="form-group">
+                <label>Maximum Age</label>
+                <input asp-for="maximum_age" class="form-control" type="number" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Remarks</label>
+            <textarea asp-for="remarks" class="form-control"></textarea>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" asp-controller="Position" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

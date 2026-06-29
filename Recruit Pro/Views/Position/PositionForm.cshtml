@@ -1,0 +1,105 @@
+﻿@using Recruit_Pro.Models
+@model Position
+
+<div class=" upperbox">
+	<div class="left">
+		@if (Model == null)
+		{
+			<h2>Add Position</h2>
+		}
+		else
+		{
+			<h2>Edit Position</h2>
+		}
+	</div>
+</div>
+<div class=" lowerbox">
+	<form asp-controller="Position" asp-action="Create" method="post" class="form">
+		@Html.AntiForgeryToken()
+		<div class="form-element">
+			<label for="title">Title:</label>
+			<input type="text" id="title" name="title" placeholder="Title" value="" />
+		</div>
+		<div class="form-element">
+			<label for="department">Department:</label>
+			<input type="text" id="department" name="department" placeholder="Department" value="" />
+		</div>
+		<div class="form-element">
+			<label for="description">Description:</label>
+			<textarea style="resize: none;" id="description" name="description" placeholder="Description" rows="5" cols="40"></textarea>
+		</div>
+		<div class="form-element">
+			<label for="gender">Gender:</label>
+			<select id="gender" name="gender">
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+				<option value="both">Both</option>
+			</select>
+		</div>
+			
+		<div class="form-element">
+			<label for="responsibilities">Responsibilities:</label>
+			<textarea style="resize: none;" id="responsibilities" name="responsibilities" placeholder="Responsibilities" rows="5" cols="40"></textarea>
+		</div>
+		<div class="form-element">
+			<label for="domicile">Domicile:</label>
+			<input type="text" id="domicile" name="domicile" placeholder="Domicile" value="" />
+		</div>
+
+		<div class="form-element">
+			<label for="provinces">Provinces:</label>
+			<textarea style="resize: none;" id="provinces" name="provinces" placeholder="Provinces ('/' separated)" rows="5" cols="40"></textarea>
+		</div>
+
+
+		<div class="form-element">
+			<label for="districts">Districts:</label>
+			<textarea style="resize: none;" id="districts" name="districts" placeholder="Districts ('/' separated)" rows="5" cols="40"></textarea>
+		</div>
+
+
+		<div class="form-element">
+			<label for="locations">Locations:</label>
+			<textarea style="resize: none;" id="locations" name="locations" placeholder="Locations ('/' separated)" rows="5" cols="40"></textarea>
+		</div>
+
+		<div class="form-element">
+			<label for="starting-salary">Starting Salary:</label>
+			<input type="number" id="starting-salary" name="starting-salary" placeholder="Starting Salary" value="" />
+		</div>
+		
+		<div class="form-element">
+			<label for="maximum-salary">Maximum Salary:</label>
+			<input type="number" id="maximum-salary" name="maximum-salary" placeholder="Maximum Salary" value="" />
+		</div>
+		<div class="form-element">
+			<label for="scale">Scale:</label>
+			<input type="text" id="scale" name="scale" placeholder="Scale" value="" />
+		</div>
+		<div class="form-element">
+			<label for="minimum-age">Minimum Age:</label>
+			<input type="number" id="minimum-age" name="minimum-age" placeholder="Minimum Age" value="" />
+		</div>
+		<div class="form-element">
+			<label for="maximum-age">Maximum Age:</label>
+			<input type="number" id="maximum-age" name="maximum-age" placeholder="Maximum Age" value="" />
+		</div>
+		<div class="form-element">
+			<label for="status">Status:</label>
+			<select id="status" name="status">
+				<option value="active">Active</option>
+				<option value="inactive">Inactive</option>
+			</select>
+		</div>
+		<div class="form-element">
+			<label for="remarks">Remarks:</label>
+			<textarea style="resize: none;" id="remarks" name="remarks" placeholder="Remarks" rows="5" cols="40"></textarea>
+		</div>
+		<div class="form-element" style="justify-self: center ; align-self: center; width: 100%;">
+			<a asp-action="Index" asp-controller="Position" class="btn btn-lg btn-danger">Cancel</a>
+			<button type="submit" class="btn btn-lg btn-success">Save</button>
+		</div>
+	</form>
+
+</div>
+		

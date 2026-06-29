@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Recruit_Pro</title>
+	<script type="importmap"></script>
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+	<div class="container">
+		<aside class="sidebar" id="sidebar">
+
+			<div class="sidebar-header">
+				<img style="width: 80%;" src="assets/RecruitPro.png" alt="" srcset="">
+				<!-- CLOSE BUTTON -->
+				<button class="close-btn" id="closeBtn">
+					×
+				</button>
+			</div>
+
+			<nav class="nav-links">
+				<a asp-controller="Dashboard" asp-action="index">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="3" y="3" width="7" height="7" rx="1" />
+						<rect x="14" y="3" width="7" height="7" rx="1" />
+						<rect x="3" y="14" width="7" height="7" rx="1" />
+						<rect x="14" y="14" width="7" height="7" rx="1" />
+					</svg>
+					&nbsp;&nbsp; Dashboard
+				</a>
+				<a asp-controller="Position" asp-action="index">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="2" y="7" width="20" height="14" rx="2" />
+						<path d="M16 7V5a2 2 0 0 0-4 0v2" />
+						<line x1="12" y1="12" x2="12" y2="16" />
+						<line x1="10" y1="14" x2="14" y2="14" />
+					</svg>
+					&nbsp;&nbsp; Positions
+				</a>
+				<a asp-controller="Advertisement" asp-action="index">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+					</svg>
+					&nbsp;&nbsp; Advertisement
+				</a>
+				<a href="#">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+					</svg>
+					&nbsp;&nbsp;Intelligent Screening
+				</a>
+				<a href="#">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="3" y="4" width="18" height="18" rx="2" />
+						<line x1="16" y1="2" x2="16" y2="6" />
+						<line x1="8" y1="2" x2="8" y2="6" />
+						<line x1="3" y1="10" x2="21" y2="10" />
+					</svg>
+					&nbsp;&nbsp;Interviews
+				</a>
+				<a asp-controller="Candidate" asp-action="Index">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+						<circle cx="9" cy="7" r="4" />
+						<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+						<path d="M16 3.13a4 4 0 0 1 0 7.75" />
+					</svg>
+					&nbsp;&nbsp;Candidates
+				</a>
+				<a href="#">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polyline points="9 11 12 14 22 4" />
+						<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+					</svg>
+					&nbsp;&nbsp;Attendance
+				</a>
+				<a href="#">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+					</svg>
+					&nbsp;&nbsp;Evaluation
+				</a>
+				<a href="#">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M12 8v4l3 3" />
+						<circle cx="12" cy="12" r="10" />
+					</svg>
+					&nbsp;&nbsp;Experience Calculator
+				</a>
+              
+			</nav>
+
+		</aside>
+
+		<main class="main-content">
+			<!-- TOPBAR -->
+			<header class="topbar">
+				<button class="btn btn-primary" id="menuBtn">
+					☰ Menu
+				</button>
+
+				<button class="btn btn-primary" id="logoutbutton">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+						<circle cx="9" cy="7" r="4" />
+					</svg>
+					Logout
+				</button>
+                 
+                    
+			</header>
+			<section class="content">
+				@RenderBody()
+			</section>
+		</main>
+	</div>
+
+	<script src="~/js/site.js"></script>
+</body>
+</html>
