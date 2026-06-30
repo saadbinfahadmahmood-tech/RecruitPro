@@ -2,9 +2,9 @@
 {
     public class Recruiter
     {
-        public string recruiter_id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string email { get; set; }
+        public string recruiter_id { get; set; } = null!;
+        public string username { get; set; } = null!;
+        public string password { get; set; } = null!;
+        public string email { get; set; } = null!;
     }
 }

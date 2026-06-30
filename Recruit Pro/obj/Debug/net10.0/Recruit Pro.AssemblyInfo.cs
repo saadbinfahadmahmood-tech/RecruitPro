@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Recruit Pro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53ee322427b08a5b42e3da5093e8ae04033283be")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dcb5e9b295670195c50e0bc31e1720baa55fd198")]
 [assembly: System.Reflection.AssemblyProductAttribute("Recruit Pro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Recruit Pro")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

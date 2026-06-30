@@ -30,8 +30,8 @@ namespace Recruit_Pro.Controllers
                     maximum_salary = (row["maximum_salary"] == DBNull.Value) ? -1 : Convert.ToInt32(row["maximum_salary"].ToString()),
                     scale = (row["scale"] == DBNull.Value) ? "" : row["scale"].ToString(),
                     minimum_age = (row["minimum_age"] == DBNull.Value) ? -1 : Convert.ToInt32(row["minimum_age"].ToString()),
-                    maximum_age = (row["minimum_age"] == DBNull.Value) ? -1 : Convert.ToInt32(row["minimum_age"].ToString()),
-                    status= Convert.ToInt32(row["status"].ToString()),
+                    maximum_age = (row["maximum_age"] == DBNull.Value) ? -1 : Convert.ToInt32(row["maximum_age"].ToString()),
+                    status= (row["status"] == DBNull.Value) ? PositionStatus.Open : (PositionStatus)row["status"],
                     remarks = (row["remarks"] == DBNull.Value) ? "" : row["remarks"].ToString()
                 });
             }
@@ -45,9 +45,8 @@ namespace Recruit_Pro.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(IFormCollection form) // AI Generated Controller Function But 80 % understandable, needs some improvements
+        public IActionResult Create(IFormCollection form) 
         {
-            // Map form values to Position model
             var model = new Position();
             model.title = form["title"].ToString();
             model.department = form["department"].ToString();
@@ -57,30 +56,32 @@ namespace Recruit_Pro.Controllers
             model.scale = form["scale"].ToString();
             model.remarks = form["remarks"].ToString();
 
-            // Parse numeric values safely
-            if (int.TryParse(form["starting-salary"], out var s)) model.starting_salary = s;
-            if (int.TryParse(form["maximum-salary"], out var m)) model.maximum_salary = m;
-            if (int.TryParse(form["minimum-age"], out var minA)) model.minimum_age = minA;
-            if (int.TryParse(form["maximum-age"], out var maxA)) model.maximum_age = maxA;
+            if(Enum.TryParse<GenderType>(form["gender"], out var gender))
+                model.gender = gender;
+            if (Enum.TryParse<PositionStatus>(form["status"], out var status))
+                model.status = status;
 
-            // Map status/gender to integers. Adjust mapping if your lookup table uses different ids.
-            var genderValue = form["gender"].ToString().ToLower();
+            if (int.TryParse(form["starting-salary"], out var s))
+                model.starting_salary = s;
+            if (int.TryParse(form["maximum-salary"], out var m)) 
+                model.maximum_salary = m;
+            if (int.TryParse(form["minimum-age"], out var minA)) 
+                model.minimum_age = minA;
+            if (int.TryParse(form["maximum-age"], out var maxA)) 
+                model.maximum_age = maxA;
 
-            var statusValue = form["status"].ToString().ToLower();
-            model.status = statusValue == "active" ? 1 : 0;
 
-            // Insert into job_position table
             string query = @"INSERT INTO job_position
-                                (title, department, description, gender, responsibilities, domicile, starting_salary, maximum_salary, scale, minimum_age, maximumAge, status, remarks)
+                                (title, department, description, gender, responsibilities, domicile, starting_salary, maximum_salary, scale, minimum_age, maximum_age, status, remarks)
                                 VALUES
-                                (@title, @department, @description, @gender, @responsibilities, @domicile, @starting_salary, @maximum_salary, @scale, @minimum_age, @maximumAge        , @status, @remarks);";
+                                (@title, @department, @description, @gender, @responsibilities, @domicile, @starting_salary, @maximum_salary, @scale, @minimum_age, @maximum_age, @status, @remarks);";
 
             MySqlParameter[] parameters = new MySqlParameter[]
             {
                 new MySqlParameter("@title", string.IsNullOrEmpty(model.title) ? (object)DBNull.Value : model.title),
                 new MySqlParameter("@department", string.IsNullOrEmpty(model.department) ? (object)DBNull.Value : model.department),
                 new MySqlParameter("@description", string.IsNullOrEmpty(model.description) ? (object)DBNull.Value : model.description),
-                new MySqlParameter("@gender", model.gender.HasValue ? (object)model.gender.Value : (object)DBNull.Value),
+                new MySqlParameter("@gender", model.gender.HasValue ? (int)model.gender : (object)DBNull.Value),
                 new MySqlParameter("@responsibilities", string.IsNullOrEmpty(model.responsibilities) ? (object)DBNull.Value : model.responsibilities),
                 new MySqlParameter("@domicile", string.IsNullOrEmpty(model.domicile) ? (object)DBNull.Value : model.domicile),
                 new MySqlParameter("@starting_salary", model.starting_salary.HasValue ? (object)model.starting_salary.Value : (object)DBNull.Value),
@@ -88,7 +89,7 @@ namespace Recruit_Pro.Controllers
                 new MySqlParameter("@scale", string.IsNullOrEmpty(model.scale) ? (object)DBNull.Value : model.scale),
                 new MySqlParameter("@minimum_age", model.minimum_age.HasValue ? (object)model.minimum_age.Value : (object)DBNull.Value),
                 new MySqlParameter("@maximum_age", model.maximum_age.HasValue ? (object)model.maximum_age.Value : (object)DBNull.Value),
-                new MySqlParameter("@status", model.status),
+                new MySqlParameter("@status", (int)model.status),
                 new MySqlParameter("@remarks", string.IsNullOrEmpty(model.remarks) ? (object)DBNull.Value : model.remarks)
             };
 

@@ -16,7 +16,20 @@ namespace Recruit_Pro.Models
         public string? scale { get; set; } 
         public int? minimum_age { get; set; } 
         public int? maximum_age { get; set; } 
-        public int status { get; set; } 
+        public PositionStatus status { get; set; } 
         public string? remarks { get; set; } 
+
+        public List<string> _districts = new List<string>();
+        
+        public List<string> _locations = new List<string>();
+        
+        public List<string> _provinces = new List<string>();
+        
+        public List<Qualification> Qualifications = new List<Qualification>();
+        
+        public List <Experience> Experiences = new List<Experience>();
+        
+        public List<Advertisement> Advertisements = new List<Advertisement>();
+
     }
 }
